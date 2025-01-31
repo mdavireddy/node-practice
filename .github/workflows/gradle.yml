@@ -27,7 +27,6 @@ jobs:
   deploy:
     name: deploy
     runs-on: ubuntu-latest
-    needs: build
     steps:
       - name: deploy
         if: ${{ github.run_attempt > 2 }}
