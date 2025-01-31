@@ -40,5 +40,5 @@ jobs:
       - name: three
         if: ${{ github.run_attempt <= 2 }}
         run: |
-          echo "deploying....."   
+          echo "deploying ....."   
           exit 1    
