@@ -19,7 +19,6 @@ jobs:
   test:
     name: Test
     runs-on: ubuntu-latest
-    needs: build
     if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main1' }}
     steps:
       - name: This step only runs if the push is to main
@@ -31,6 +30,11 @@ jobs:
     needs: build
     steps:
       - name: deploy
+        if: ${{ github.run_attempt > 2 }}
         run: |
           echo "deploying....."   
-          exit 1
+      - name: two
+        if: ${{ github.run_attempt < 2 }}
+        run: |
+          echo "deploying....."   
+          exit 1    
