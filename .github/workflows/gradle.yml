@@ -19,7 +19,7 @@ jobs:
   test:
     name: Test
     runs-on: ubuntu-latest
-    if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main1' }}
+    if: ${{ github.event_name == 'push' && github.run_attempt > 3 }}
     steps:
       - name: This step only runs if the push is to main
         run: echo "This job runs only on pushes to main branch."
@@ -27,6 +27,8 @@ jobs:
   deploy:
     name: deploy
     runs-on: ubuntu-latest
+    if: ${{ github.run_attempt <= 2 }}
+
     steps:
       - name: one
         if: ${{ github.run_attempt > 4 }}
