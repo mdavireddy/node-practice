@@ -28,12 +28,17 @@ jobs:
     name: deploy
     runs-on: ubuntu-latest
     steps:
-      - name: deploy
-        if: ${{ github.run_attempt > 2 }}
+      - name: one
+        if: ${{ github.run_attempt >= 3 }}
         run: |
           echo "deploying....."   
       - name: two
-        if: ${{ github.run_attempt < 2 }}
+        if: ${{ github.run_attempt == 10 }}
+        run: |
+          echo "deploying....."        
+      
+      - name: three
+        if: ${{ github.run_attempt <= 2 }}
         run: |
           echo "deploying....."   
           exit 1    
